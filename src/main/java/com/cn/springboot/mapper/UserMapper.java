@@ -15,7 +15,8 @@ public interface UserMapper {
      * @return
      */
     @Select(value = "select * from user")
-    @Results(value = { @Result(column = "userName", property = "userName", jdbcType = JdbcType.VARCHAR)})
+    @Results(value = { @Result(column = "USER_ID", property = "userId", jdbcType = JdbcType.VARCHAR),
+    				   @Result(column = "USER_NAME", property = "userName", jdbcType = JdbcType.VARCHAR)})
     List<UserBean> getUsers();
 
     /**
@@ -23,7 +24,7 @@ public interface UserMapper {
      *
      * @param user
      */
-    @Update("update user set userName= #{userName} where userId=#{userId}")
+    @Update("update user set USER_NAME= #{userName} where USER_ID=#{userId}")
     void update(UserBean user);
 
     /**
@@ -31,7 +32,7 @@ public interface UserMapper {
      *
      * @param id
      */
-    @Delete("delete from user where userId=#{userId}")
+    @Delete("delete from user where USER_ID=#{userId}")
     void del(String id);
 
     /**
@@ -39,8 +40,8 @@ public interface UserMapper {
      *
      * @param user
      */
-    @Insert("insert into user(userName) values(#{userName})")
-    @Options(useGeneratedKeys=true, keyProperty="userName", keyColumn="userName")
+    @Insert("insert into user(USER_NAME) values(#{userName})")
+    @Options(useGeneratedKeys=true, keyProperty="userId", keyColumn="USER_ID")
     void save(UserBean user);
 
 }

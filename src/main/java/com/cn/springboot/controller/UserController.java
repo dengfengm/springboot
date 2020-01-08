@@ -23,17 +23,17 @@ public class UserController {
     @RequestMapping(value="/getuser")
     public List<UserBean> getUsers() {
         List<UserBean> userList = userMapper.getUsers();
-        String name = (String) redis.get("1000");
-        System.out.println("-----------------------------" + name + "-----------------------------");
+//        String name = (String) redis.get("1000");
+//        System.out.println("-----------------------------" + name + "-----------------------------");
         return userList;
     }
 
     @RequestMapping(value="/update/{id}")
-    public List<UserBean> update(@PathVariable String id) {
+    public List<UserBean> update(@PathVariable Integer id) {
         UserBean user=new UserBean();
         user.setUserId(id);
         user.setUserName("updateName");
-        redis.set(id,user.getUserName());
+//        redis.set(id,user.getUserName());
         userMapper.update(user);
         return userMapper.getUsers();
 
@@ -45,7 +45,7 @@ public class UserController {
         return userMapper.getUsers();
     }
 
-    @RequestMapping(value="add")
+    @RequestMapping(value="/add")
     public List<UserBean> add(){
         UserBean user=new UserBean();
         user.setUserName("test");
